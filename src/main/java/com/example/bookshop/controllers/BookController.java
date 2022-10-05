@@ -1,8 +1,7 @@
 package com.example.bookshop.controllers;
 
-import com.example.bookshop.dto.AuthorDTO;
+
 import com.example.bookshop.dto.BookDTO;
-import com.example.bookshop.services.AuthorService;
 import com.example.bookshop.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 
 @Entity
+@Table
 @Data
 public class Book extends BaseEntity {
     @Column(insertable = false)

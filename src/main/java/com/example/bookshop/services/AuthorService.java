@@ -5,6 +5,7 @@ import com.example.bookshop.exceptions.ResourceNotFoundException;
 import com.example.bookshop.models.Author;
 import com.example.bookshop.repositories.AuthorRepository;
 import com.example.bookshop.utils.Gender;
+import com.example.bookshop.utils.GenderConverter;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -49,7 +50,7 @@ public class AuthorService {
 
     public void prepare(Author author, AuthorDTO authorDTO) {
         author.setName(authorDTO.getName());
-        author.setGender(Gender.values()[authorDTO.getGender()]);
+        author.setGender(new GenderConverter().convert(authorDTO.getGender()));
         if (author.getCreatedDateTime() == null)
             author.setCreatedDateTime(LocalDateTime.now());
     }

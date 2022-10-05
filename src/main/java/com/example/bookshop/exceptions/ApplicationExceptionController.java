@@ -2,10 +2,15 @@ package com.example.bookshop.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 @ControllerAdvice
 public class ApplicationExceptionController {
@@ -18,12 +23,20 @@ public class ApplicationExceptionController {
     public ResponseEntity<ExceptionResponse> IllegalArgumentExceptionHandler(IllegalArgumentException exception) {
         return prepareResponseObject(HttpStatus.BAD_REQUEST, exception.getMessage());
     }
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ExceptionResponse> handleValidationExceptions(
+            MethodArgumentNotValidException ex) {
+        HashMap<String,String> errors=new HashMap<>();
+        ex.getBindingResult().getAllErrors().forEach((error) -> {
+            String fieldName = ((FieldError) error).getField();
+            String errorMessage = error.getDefaultMessage();
+            errors.put(fieldName,errorMessage);
 
-    private ResponseEntity<ExceptionResponse> prepareResponseObject(HttpStatus httpStatus, String message) {
-        return new ResponseEntity<>(prepareExceptionResponse(httpStatus, message), httpStatus);
+        });
+        return prepareResponseObject(HttpStatus.BAD_REQUEST,errors.toString());
     }
 
-    private ExceptionResponse prepareExceptionResponse(HttpStatus httpStatus, String message) {
-        return new ExceptionResponse(httpStatus.value(), message, LocalDateTime.now());
+    private ResponseEntity<ExceptionResponse> prepareResponseObject(HttpStatus httpStatus, String message) {
+        return new ResponseEntity<>(new ExceptionResponse(httpStatus.value(), message, LocalDateTime.now()), httpStatus);
     }
 }

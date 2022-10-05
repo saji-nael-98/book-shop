@@ -4,17 +4,19 @@ import lombok.Data;
 import org.springframework.http.HttpStatus;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 public class ExceptionResponse {
     private int httpStatus;
     private String message;
-    private LocalDateTime localDateTime;
+    private String localDateTime;
 
     public ExceptionResponse(int httpStatus, String message, LocalDateTime localDateTime) {
         this.httpStatus = httpStatus;
         this.message = message;
-        this.localDateTime = localDateTime;
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        this.localDateTime = localDateTime.format(format);
     }
 
     public int getHttpStatus() {
@@ -25,7 +27,7 @@ public class ExceptionResponse {
         return message;
     }
 
-    public LocalDateTime getLocalDateTime() {
+    public String getLocalDateTime() {
         return localDateTime;
     }
 }

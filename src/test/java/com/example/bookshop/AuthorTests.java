@@ -2,6 +2,7 @@ package com.example.bookshop;
 
 import com.example.bookshop.dto.AuthorDTO;
 import com.example.bookshop.services.AuthorService;
+import com.example.bookshop.utils.Gender;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,7 +16,7 @@ class AuthorTests {
     void createAuthor() {
         AuthorDTO authorDTO = new AuthorDTO();
         authorDTO.setName("test 1");
-        authorDTO.setGender(1);
+        authorDTO.setGender(Gender.MALE.name());
         System.out.println(authorService.create(authorDTO));
     }
 
@@ -23,8 +24,8 @@ class AuthorTests {
     void updateAuthor() {
         AuthorDTO authorDTO = new AuthorDTO();
         authorDTO.setName("test 1");
-        authorDTO.setGender(1);
-        System.out.println(authorService.update(1L, authorDTO));
+        authorDTO.setGender(Gender.MALE.name());
+
     }
 
     @Test

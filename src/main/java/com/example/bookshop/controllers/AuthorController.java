@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/author")
 public class AuthorController {
@@ -13,7 +15,7 @@ public class AuthorController {
     private AuthorService authorService;
 
     @PostMapping
-    public ResponseEntity<Object> create(@RequestBody AuthorDTO authorDTO) {
+    public ResponseEntity<Object> create(@Valid @RequestBody AuthorDTO authorDTO) {
         return ResponseEntity.ok(authorService.create(authorDTO));
     }
 
