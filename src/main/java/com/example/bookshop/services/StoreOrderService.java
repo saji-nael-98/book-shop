@@ -6,7 +6,6 @@ import com.example.bookshop.models.Book;
 import com.example.bookshop.models.StoreOrder;
 import com.example.bookshop.repositories.BookRepository;
 import com.example.bookshop.repositories.StoreRepository;
-import com.example.bookshop.utils.OrderStatus;
 import com.example.bookshop.utils.OrderStatusConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

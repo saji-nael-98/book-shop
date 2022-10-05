@@ -1,6 +1,6 @@
 package com.example.bookshop.dto;
 
-import lombok.Data;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

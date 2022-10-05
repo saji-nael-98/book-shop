@@ -3,10 +3,7 @@ package com.example.bookshop.models;
 import com.example.bookshop.base.BaseEntity;
 import com.example.bookshop.utils.OrderStatus;
 import lombok.Data;
-import net.bytebuddy.asm.Advice;
-
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Table
